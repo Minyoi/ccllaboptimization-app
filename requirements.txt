@@ -8,6 +8,7 @@ numpy
 plotly
 pandasql
 openpyxl
+altair
 gspread
 st-gsheets-connection
 matplotlib
