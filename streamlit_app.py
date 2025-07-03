@@ -153,7 +153,7 @@ df_smear_join = df4_1.join(df3_1, how='inner')
       
 
 with st.sidebar:
-    st.title('🏂 CIDRZ Lab Optimization dashboard')
+    st.title('🏂 CCL Lab Optimization dashboard')
 
     quarter_list = list(culture_df.month_processed.unique())[::-1]
     quarter_list.sort()
