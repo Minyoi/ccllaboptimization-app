@@ -186,15 +186,15 @@ with col[0]:
     culture_tats = culture_tat.reset_index()
     culture_tats['month'] = culture_tats['month_processed'].astype(str)
     culture_tats.drop('month_processed', axis=1)
-    st.line_chart(culture_tats, x='month')
-    st.dataframe(culture_tat)
+    # st.line_chart(culture_tats, x='month')
 
     a = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Positive')
     b = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Negative')
 
     c = alt.layer(a, b)
     st.altair_chart(c, use_container_width=True)
-
+    
+    st.dataframe(culture_tat)
     
     with st.expander('Key', expanded=True):
         st.write('''
