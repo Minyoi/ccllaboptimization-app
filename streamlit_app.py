@@ -71,8 +71,9 @@ df1_1 = df1.copy()
 df1_1['total_samples'] = df1[['Contaminated','Negative','TF','Z_test']].sum(axis=1) 
 df1_1['perc_contaminated'] = df1_1['Contaminated']/df1_1['total_samples'] * 100
 df1_1['perc_negative'] = df1_1['Negative']/df1_1['total_samples'] * 100
+df1_1['perc_positive'] = df1_1['Positive']/df1_1['total_samples'] * 100
 df1_2 = df1_1.copy()
-df1_2.drop(['Contaminated', 'Negative', 'TF', 'Z_test','total_samples'], axis='columns', inplace=True)
+df1_2.drop(['Contaminated', 'Negative', 'Positive','TF', 'Z_test','total_samples'], axis='columns', inplace=True)
 df1_3 = culture_df.copy()
 culture_tat = pd.crosstab(index=df1_3['month_processed'],
                            columns=df1_3['culture_result'],
