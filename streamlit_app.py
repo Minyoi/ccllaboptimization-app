@@ -81,11 +81,6 @@ culture_tat = pd.crosstab(index=df1_3['month_processed'],
 culture_tat = culture_tat.rename(columns = {0.0:'Negative', 1.0:'Positive',2.0:'TF', 3.0:'Z_test',4.0:'Contaminated',5.0:'Insufficient'})
         
 
-# dfc = df1.reset_index()
-# dfc['year_processed'] = pd.PeriodIndex(dfc['month_processed']).asfreq('Y')
-# dfc.set_index('month_processed', inplace=True)
-
-
 df2=pd.crosstab(index=xpert_df['month_processed'], columns=xpert_df['xpert_result'])
 
 df2 = df2.rename(columns = {0.0:'MTB_Not_detected', 1.0:'MTB_Detected',2.0:'Error', 6.0:'Z_test',8.0:'Insufficient'})
@@ -101,9 +96,6 @@ xpert_tat = pd.crosstab(index=df2_3['month_processed'],
                            values=df2_3['turnaround_time'],
                            aggfunc='mean')
 xpert_tat = xpert_tat.rename(columns = {0.0:'MTB_Not_detected', 1.0:'MTB_Detected',2.0:'Error', 6.0:'Z_test',8.0:'Insufficient'})
- 
-
-
 df5=pd.crosstab(index=xpos_rifdet_df['month_processed'], columns=xpos_rifdet_df['xpos_rfdet'])
 df5 = df5.rename(columns = {0.0:'MTB Det RIF Negative', 1.0:'MTB_Det RIF Positive'})
 df5_1 = df5.copy()
@@ -141,6 +133,14 @@ df3_1['perc_positive'] = df3_1['TB_Detected']/df3_1['total_samples'] * 100
 df3_1['perc_negative'] = df3_1['TB_Not_detected']/df3_1['total_samples'] * 100
 df3_2 = df3_1.copy()
 df3_2.drop(['TB_Not_detected', 'TB_Detected', 'Z_test','total_samples'], axis='columns', inplace=True)
+
+df2_3 = smear_df.copy()
+smear_tat = pd.crosstab(index=df2_3['month_processed'],
+                           columns=df2_3['smear_result'],
+                           values=df2_3['turnaround_time'],
+                           aggfunc='mean')
+smear_tat = smear_tat.rename(columns = {0.0:'TB_Not_detected', 1.0:'TB_Detected',2.0:'Z_test'})
+
 
 #Low grade processing
 df4=pd.crosstab(index=smear_df['month_processed'], columns=smearlg_df['smear_lowgrade'])
