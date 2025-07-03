@@ -180,7 +180,7 @@ with col[0]:
     df1_2 = df1_2.reset_index()
     #st.write(df1_2)
     df1_2['month_processed'] = df1_2['month_processed'].astype(str)
-    st.line_chart(df1_2, x='month_processed')
+    st.line_chart(df1_2, x='month_processed', y_label='percentage')
     st.write("Culture Turnaround time trends")
     culture_tats = culture_tat.reset_index()
     culture_tats['month'] = culture_tats['month_processed'].astype(str)
@@ -213,7 +213,7 @@ with col[1]:
     df2_2 = df2_2.reset_index()
     # st.write(df2_2)
     df2_2['month_processed'] = df2_2['month_processed'].astype(str)
-    st.line_chart(df2_2, x='month_processed')
+    st.line_chart(df2_2, x='month_processed', y_label='percentage')
     st.write("Xpert Turnaround time trends")
     xpert_tats = xpert_tat.reset_index()
     xpert_tats['month'] = xpert_tats['month_processed'].astype(str)
@@ -250,7 +250,7 @@ with col[2]:
         
     df_smear_join.drop(['Not_Lowgrade', 'Low_Grade','total_samples','Z_test', 'TB_Detected','TB_Not_detected','total_smear','perc_negative'], axis='columns', inplace=True)
     df_smear_join['month_processed'] = df_smear_join['month_processed'].astype(str)
-    st.line_chart(df_smear_join, x='month_processed')
+    st.line_chart(df_smear_join, x='month_processed', y_label='percentage')
     
     st.write("Smear Turnaround time trends")
     smear_tats = smear_tat.reset_index()
