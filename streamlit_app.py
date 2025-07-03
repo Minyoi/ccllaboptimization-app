@@ -193,7 +193,7 @@ with col[0]:
     c = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='TF')
     d = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Contaminated')
     e = alt.layer(a, b,c,d)
-    st.altair_chart(d, use_container_width=True)
+    st.altair_chart(e, use_container_width=True)
 
     st.dataframe(culture_tat)
     
