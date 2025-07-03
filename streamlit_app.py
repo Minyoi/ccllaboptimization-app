@@ -190,10 +190,11 @@ with col[0]:
 
     a = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Positive')
     b = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Negative')
+    c = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='TF')
+    d = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Contaminated')
+    e = alt.layer(a, b,c,d)
+    st.altair_chart(d, use_container_width=True)
 
-    c = alt.layer(a, b)
-    st.altair_chart(c, use_container_width=True)
-    
     st.dataframe(culture_tat)
     
     with st.expander('Key', expanded=True):
