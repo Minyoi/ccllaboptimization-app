@@ -193,7 +193,7 @@ with col[0]:
     e = alt.layer(a, b,c,d)
     st.altair_chart(e, use_container_width=True)
 
-    st.dataframe(culture_tat)
+    # st.dataframe(culture_tat)
     
     with st.expander('Key', expanded=True):
         st.write('''
@@ -226,7 +226,7 @@ with col[1]:
     e = alt.layer(a, b,c,d)
     st.altair_chart(e, use_container_width=True)
 
-    st.dataframe(xpert_tat)
+    # st.dataframe(xpert_tat)
 
     with st.expander('Key', expanded=True):
         st.write('''
@@ -263,7 +263,7 @@ with col[2]:
     c = alt.layer(a, b)
     st.altair_chart(c, use_container_width=True)
 
-    st.dataframe(smear_tat)
+    # st.dataframe(smear_tat)
 
 
 
