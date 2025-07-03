@@ -251,6 +251,21 @@ with col[2]:
     df_smear_join['month_processed'] = df_smear_join['month_processed'].astype(str)
     st.line_chart(df_smear_join, x='month_processed')
     
+    st.write("Smear Turnaround time trends")
+    smear_tats = smear_tat.reset_index()
+    smear_tats['month'] = smear_tats['month_processed'].astype(str)
+    smear_tats.drop('month_processed', axis=1)
+
+    a = alt.Chart(smear_tats).mark_area(opacity=1).encode(x='month', y='TB_Not_detected')
+    b = alt.Chart(smear_tats).mark_area(opacity=1).encode(x='month', y='TB_Detected')
+
+    c = alt.layer(a, b)
+    st.altair_chart(c, use_container_width=True)
+
+    st.dataframe(smear_tat)
+
+
+
     with st.expander('Key', expanded=True):
         st.write('''
             - Data: Lab data processed upto ''' + str(max(quarter_list)) + '''
