@@ -198,7 +198,7 @@ with col[0]:
     
     with st.expander('Key', expanded=True):
         st.write('''
-            - Data: Lab data processed upto ''' + str(max(quarter_list)) + '''
+            - Culture: Lab data processed upto ''' + str(max(quarter_list)) + '''
             ''')   
 
 with col[1]:
@@ -232,7 +232,7 @@ with col[1]:
 
     with st.expander('Key', expanded=True):
         st.write('''
-            - Data: Lab data processed upto ''' + str(max(quarter_list)) + '''
+            - Xpert: Lab data processed upto ''' + str(max(quarter_list)) + '''
             ''')   
 
 with col[2]:
@@ -271,7 +271,7 @@ with col[2]:
 
     with st.expander('Key', expanded=True):
         st.write('''
-            - Data: Lab data processed upto ''' + str(max(quarter_list)) + '''
+            - Smear: Lab data processed upto ''' + str(max(quarter_list)) + '''
 
             ''')   
 
