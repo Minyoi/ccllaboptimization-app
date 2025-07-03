@@ -213,7 +213,19 @@ with col[1]:
     # st.write(df2_2)
     df2_2['month_processed'] = df2_2['month_processed'].astype(str)
     st.line_chart(df2_2, x='month_processed')
-    
+    st.write("Xpert Turnaround time trends")
+    xpert_tats = xpert_tat.reset_index()
+    xpert_tats['month'] = xpert_tats['month_processed'].astype(str)
+    xpert_tats.drop('month_processed', axis=1)
+
+    a = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='MTB_Not_detected')
+    b = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='MTB_Detected')
+    c = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='Error')
+    d = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='Insufficient')
+    e = alt.layer(a, b,c,d)
+    st.altair_chart(e, use_container_width=True)
+
+    st.dataframe(xpert_tat)
 
     with st.expander('Key', expanded=True):
         st.write('''
