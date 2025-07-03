@@ -68,7 +68,7 @@ df1 = culture_df['month_processed'].value_counts().rename_axis('unique_values').
 df1=pd.crosstab(index=culture_df['month_processed'], columns=culture_df['culture_result'])
 df1 = df1.rename(columns = {0.0:'Negative', 1.0:'Positive',2.0:'TF', 3.0:'Z_test',4.0:'Contaminated',5.0:'Insufficient'})
 df1_1 = df1.copy()
-df1_1['total_samples'] = df1[['Contaminated','Negative','TF','Z_test']].sum(axis=1) 
+df1_1['total_samples'] = df1[['Contaminated','Positive','Negative','TF','Z_test']].sum(axis=1) 
 df1_1['perc_contaminated'] = df1_1['Contaminated']/df1_1['total_samples'] * 100
 df1_1['perc_negative'] = df1_1['Negative']/df1_1['total_samples'] * 100
 df1_1['perc_positive'] = df1_1['Positive']/df1_1['total_samples'] * 100
