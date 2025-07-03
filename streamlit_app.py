@@ -95,10 +95,10 @@ df2_1['perc_mtbdetected'] = df2_1['MTB_Detected']/df2_1['total_samples'] * 100
 df2_1['perc_error'] = df2_1['Error']/df2_1['total_samples'] * 100
 df2_2 = df2_1.copy()
 df2_2.drop(['Insufficient', 'Error', 'MTB_Detected', 'MTB_Not_detected','Z_test','total_samples'], axis='columns', inplace=True)
-
-xpert_tat = pd.crosstab(index=df1_3['month_processed'],
-                           columns=df1_3['xpert_result'],
-                           values=df1_3['turnaround_time'],
+df2_3 = xpert_df.copy()
+xpert_tat = pd.crosstab(index=df2_3['month_processed'],
+                           columns=df2_3['xpert_result'],
+                           values=df2_3['turnaround_time'],
                            aggfunc='mean')
 xpert_tat = xpert_tat.rename(columns = {0.0:'MTB_Not_detected', 1.0:'MTB_Detected',2.0:'Error', 6.0:'Z_test',8.0:'Insufficient'})
  
