@@ -174,8 +174,7 @@ with col[0]:
     df1_1 = df1_1.reset_index() 
     df1_1['month_processed'] = df1_1['month_processed'].astype(str)
     st.bar_chart(df1_1,x="month_processed",y="total_samples")
-    st.write("Culture Results")
-    st.dataframe(df1)
+
     st.write("Culture Quality Indicator Trends")
     df1_2 = df1_2.reset_index()
     #st.write(df1_2)
@@ -194,6 +193,8 @@ with col[0]:
     st.altair_chart(e, use_container_width=True)
 
     # st.dataframe(culture_tat)
+    st.write("Culture Results")
+    st.dataframe(df1)
     
     with st.expander('Key', expanded=True):
         st.write('''
@@ -207,8 +208,7 @@ with col[1]:
     df2_1 = df2_1.reset_index() 
     df2_1['month_processed'] = df2_1['month_processed'].astype(str)
     st.bar_chart(df2_1, x="month_processed", y="total_samples")
-    st.write("Xpert results")
-    st.dataframe(df2)
+
     st.write("Xpert Quality Indicator Trends")
     df2_2 = df2_2.reset_index()
     # st.write(df2_2)
@@ -227,6 +227,8 @@ with col[1]:
     st.altair_chart(e, use_container_width=True)
 
     # st.dataframe(xpert_tat)
+    st.write("Xpert results")
+    st.dataframe(df2)
 
     with st.expander('Key', expanded=True):
         st.write('''
@@ -239,9 +241,7 @@ with col[2]:
     df3_1 = df3_1.reset_index() 
     df3_1['month_processed'] = df3_1['month_processed'].astype(str)
     st.bar_chart(df3_1,x='month_processed', y="total_samples")
-    st.write("Smear results")
-    st.dataframe(df3)
-    # st.write(df3_1)
+
     st.write("Smear Quality Indicator Trends")
     df3_2 = df3_2.reset_index()
     # st.write(df3_2)
@@ -264,7 +264,9 @@ with col[2]:
     st.altair_chart(c, use_container_width=True)
 
     # st.dataframe(smear_tat)
-
+    st.write("Smear results")
+    st.dataframe(df3)
+    # st.write(df3_1)
 
 
     with st.expander('Key', expanded=True):
