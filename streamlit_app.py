@@ -185,10 +185,10 @@ with col[0]:
     culture_tats['month'] = culture_tats['month_processed'].astype(str)
     culture_tats.drop('month_processed', axis=1)
 
-    a = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Positive')
-    b = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Negative')
-    c = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='TF')
-    d = alt.Chart(culture_tats).mark_area(opacity=1).encode(x='month', y='Contaminated')
+    a = alt.Chart(culture_tats).mark_area(opacity=1, color="#308b8b").encode(x='month', y='Positive')
+    b = alt.Chart(culture_tats).mark_area(opacity=1, color="#b14a8e").encode(x='month', y='Negative')
+    c = alt.Chart(culture_tats).mark_area(opacity=1, color="#1751cc").encode(x='month', y='TF')
+    d = alt.Chart(culture_tats).mark_area(opacity=1, color='#beaed4').encode(x='month', y='Contaminated')
     e = alt.layer(a, b,c,d)
     st.altair_chart(e, use_container_width=True)
 
@@ -261,6 +261,7 @@ with col[2]:
     b = alt.Chart(smear_tats).mark_area(opacity=1).encode(x='month', y='TB_Detected')
 
     c = alt.layer(a, b)
+
     st.altair_chart(c, use_container_width=True)
 
     # st.dataframe(smear_tat)
