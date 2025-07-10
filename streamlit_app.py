@@ -279,7 +279,7 @@ with col[2]:
     df3_2['month_processed'] = df3_2['month_processed'].astype(str)
     df_smear_join = df_smear_join.reset_index()
         
-    df_smear_join.drop(['Not_Lowgrade', 'Low_Grade','total_samples','Z_test', 'TB_Detected','TB_Not_detected','total_smear','perc_negative'], axis='columns', inplace=True)
+    df_smear_join.drop(['Not_Lowgrade', 'Low_Grade','total_samples','Z_test', 'TB_Detected','TB_Not_detected','total_smear','p_negative'], axis='columns', inplace=True)
     df_smear_join['month_processed'] = df_smear_join['month_processed'].astype(str)
     st.line_chart(df_smear_join, x='month_processed', y_label='percentage')
     
