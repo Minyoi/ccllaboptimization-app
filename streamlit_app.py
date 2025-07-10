@@ -206,7 +206,9 @@ with col[0]:
         title="Turn around time (Culture)"
     )
     
-    st.altair_chart(chart, use_container_width=True)
+    line = alt.Chart(pd.DataFrame({'y': [65]})).mark_rule().encode(y='y')
+    st.altair_chart(chart+line, use_container_width=True)
+    
 
     # st.dataframe(culture_tat)
     st.write("Culture Results")
