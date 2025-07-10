@@ -70,9 +70,9 @@ df1=pd.crosstab(index=culture_df['month_processed'], columns=culture_df['culture
 df1 = df1.rename(columns = {0.0:'Negative', 1.0:'Positive',2.0:'TF', 3.0:'Z_test',4.0:'Contaminated',5.0:'Insufficient'})
 df1_1 = df1.copy()
 df1_1['total_samples'] = df1[['Contaminated','Positive','Negative','TF','Z_test']].sum(axis=1) 
-df1_1['perc_contaminated'] = df1_1['Contaminated']/df1_1['total_samples'] * 100
-df1_1['perc_negative'] = df1_1['Negative']/df1_1['total_samples'] * 100
-df1_1['perc_positive'] = df1_1['Positive']/df1_1['total_samples'] * 100
+df1_1['p_contaminated'] = df1_1['Contaminated']/df1_1['total_samples'] * 100
+df1_1['p_negative'] = df1_1['Negative']/df1_1['total_samples'] * 100
+df1_1['p_positive'] = df1_1['Positive']/df1_1['total_samples'] * 100
 df1_2 = df1_1.copy()
 df1_2.drop(['Contaminated', 'Negative', 'Positive','TF', 'Z_test','total_samples'], axis='columns', inplace=True)
 df1_3 = culture_df.copy()
@@ -88,8 +88,8 @@ df2=pd.crosstab(index=xpert_df['month_processed'], columns=xpert_df['xpert_resul
 df2 = df2.rename(columns = {0.0:'MTB_Not_detected', 1.0:'MTB_Detected',2.0:'Error', 6.0:'Z_test',8.0:'Insufficient'})
 df2_1 = df2.copy()
 df2_1['total_samples'] = df2[['Insufficient','Error','MTB_Detected','MTB_Not_detected','Z_test']].sum(axis=1) 
-df2_1['perc_mtbdetected'] = df2_1['MTB_Detected']/df2_1['total_samples'] * 100
-df2_1['perc_error'] = df2_1['Error']/df2_1['total_samples'] * 100
+df2_1['p_mtbdetected'] = df2_1['MTB_Detected']/df2_1['total_samples'] * 100
+df2_1['p_error'] = df2_1['Error']/df2_1['total_samples'] * 100
 df2_2 = df2_1.copy()
 df2_2.drop(['Insufficient', 'Error', 'MTB_Detected', 'MTB_Not_detected','Z_test','total_samples'], axis='columns', inplace=True)
 df2_3 = xpert_df.copy()
@@ -122,7 +122,7 @@ def add_column_if_not_exists(df, column_name):
 
 df5_1 = add_column_if_not_exists(df5_1, 'MTB_Det RIF Positive')
 df5_1['total_samples'] = df5_1[['MTB Det RIF Negative','MTB_Det RIF Positive']].sum(axis=1) 
-df5_1['perc_positive'] = df5_1['MTB_Det RIF Positive']/df5_1['total_samples'] * 100
+df5_1['p_positive'] = df5_1['MTB_Det RIF Positive']/df5_1['total_samples'] * 100
         
 
 
@@ -131,8 +131,8 @@ df3=pd.crosstab(index=smear_df['month_processed'], columns=smear_df['smear_resul
 df3 = df3.rename(columns = {0.0:'TB_Not_detected', 1.0:'TB_Detected',2.0:'Z_test'})
 df3_1 = df3.copy()
 df3_1['total_samples'] = df3[['TB_Not_detected','TB_Detected','Z_test']].sum(axis=1) 
-df3_1['perc_positive'] = df3_1['TB_Detected']/df3_1['total_samples'] * 100
-df3_1['perc_negative'] = df3_1['TB_Not_detected']/df3_1['total_samples'] * 100
+df3_1['p_positive'] = df3_1['TB_Detected']/df3_1['total_samples'] * 100
+df3_1['p_negative'] = df3_1['TB_Not_detected']/df3_1['total_samples'] * 100
 df3_2 = df3_1.copy()
 df3_2.drop(['TB_Not_detected', 'TB_Detected', 'Z_test','total_samples'], axis='columns', inplace=True)
 
@@ -149,7 +149,7 @@ df4=pd.crosstab(index=smear_df['month_processed'], columns=smearlg_df['smear_low
 df4 = df4.rename(columns = {0.0:'Not_Lowgrade', 1.0:'Low_Grade'})
 df4_1 = df4.copy()
 df4_1['total_smear'] = df4[['Not_Lowgrade','Low_Grade']].sum(axis=1) 
-df4_1['perc_lowgrade'] = df4_1['Low_Grade']/df4_1['total_smear'] * 100
+df4_1['p_lowgrade'] = df4_1['Low_Grade']/df4_1['total_smear'] * 100
         
 df_smear_join = df4_1.join(df3_1, how='inner')
       
