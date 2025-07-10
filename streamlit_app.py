@@ -203,7 +203,7 @@ with col[0]:
     # Create an Altair chart
     chart = alt.Chart(data_long).mark_area(opacity=0.5).encode(
         x='month',
-        y='value:Q',
+        y='value:T',
         color='results:N'  # Use the category field for color encoding
     ).properties(
         title="My plot"
