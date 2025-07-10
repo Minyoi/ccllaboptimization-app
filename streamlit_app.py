@@ -198,12 +198,12 @@ with col[0]:
     st.dataframe(df1)
 
     # New data transformed
-    data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results')
+    data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results', value_name='Negative,Positive,TF,Z_test,Contaminated')
     
     # Create an Altair chart
     chart = alt.Chart(data_long).mark_line().encode(
         x='month',
-        y='results',
+        y='Negative,Positive,TF,Z_test,Contaminated',
         color='results:N'  # Use the category field for color encoding
     ).properties(
         title="My plot"
