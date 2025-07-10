@@ -201,10 +201,9 @@ with col[0]:
     data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results', value_name='Negative,Positive,TF,Z_test,Contaminated')
     
     # Create an Altair chart
-    chart = alt.Chart(data_long).mark_line().encode(
+    chart = alt.Chart(data_long).mark_area(opacity=0.5).encode(
         x='month',
-        # y='Negative,Positive,TF,Z_test,Contaminated',
-        y='results',
+        y='Negative,Positive,TF,Z_test,Contaminated',
         color='results:N'  # Use the category field for color encoding
     ).properties(
         title="My plot"
