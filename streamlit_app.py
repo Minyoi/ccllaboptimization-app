@@ -311,7 +311,7 @@ with col[2]:
     )
     
     line2 = alt.Chart(pd.DataFrame({'y': [2]})).mark_rule().encode(y='y')
-    st.altair_chart(chart+line, use_container_width=True)
+    st.altair_chart(chart+line2, use_container_width=True)
 
 
 
