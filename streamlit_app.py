@@ -194,7 +194,7 @@ with col[0]:
     f = alt.layer(a,b,c,d,e)
     st.altair_chart(f, use_container_width=True)
 
-    # New data transformed
+    # New culture turnaround time data transformed
     data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results', value_name='days')
     
     # Create an Altair chart
@@ -241,6 +241,21 @@ with col[1]:
     d = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='Insufficient')
     e = alt.layer(a, b,c,d)
     st.altair_chart(e, use_container_width=True)
+
+    # New xpert turnaround time data transformed
+    xdata_long = pd.melt(xpert_tats, id_vars=['month'], value_vars=['MTB_Not_detected','MTB_Detected','Error','Insufficient'], var_name='results', value_name='days')
+    
+    # Create an Altair chart
+    chart = alt.Chart(xdata_long).mark_line().encode(
+        x='month',
+        y='days:Q',  
+        color='results:N'  # Use the category field for color encoding
+    ).properties(
+        title="Turn around time (Xpert)"
+    )
+    
+    st.altair_chart(chart, use_container_width=True)
+
 
     # st.dataframe(xpert_tat)
     st.write("Xpert results")
