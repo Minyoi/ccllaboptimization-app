@@ -186,12 +186,13 @@ with col[0]:
     culture_tats['month'] = culture_tats['month_processed'].astype(str)
     culture_tats.drop('month_processed', axis=1)
 
-    a = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#308b8b").encode(x='month', y='Positive')
-    b = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#b14a8e").encode(x='month', y='Negative')
-    c = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#1751cc").encode(x='month', y='TF')
-    d = alt.Chart(culture_tats).mark_area(opacity=0.5, color='#beaed4').encode(x='month', y='Contaminated')
-    e = alt.layer(a,b,c,d)
-    st.altair_chart(e, use_container_width=True)
+    a = alt.Chart(culture_tats).mark_area(opacity=0.6, color="#308b8b").encode(x='month', y='Positive')
+    b = alt.Chart(culture_tats).mark_area(opacity=0.6, color="#b14a8e").encode(x='month', y='Negative')
+    c = alt.Chart(culture_tats).mark_area(opacity=0.6, color="#1751cc").encode(x='month', y='TF')
+    d = alt.Chart(culture_tats).mark_area(opacity=0.6, color="#151d2e").encode(x='month', y='Z_test')
+    e = alt.Chart(culture_tats).mark_area(opacity=0.6, color='#beaed4').encode(x='month', y='Contaminated')
+    f = alt.layer(a,b,c,d,e)
+    st.altair_chart(f, use_container_width=True)
 
     # New data transformed
     data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results', value_name='days')
