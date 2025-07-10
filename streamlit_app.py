@@ -193,26 +193,23 @@ with col[0]:
     e = alt.layer(a,b,c,d)
     st.altair_chart(e, use_container_width=True)
 
-    # st.dataframe(culture_tat)
-    st.write("Culture Results")
-    st.dataframe(df1)
-
     # New data transformed
-    data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results', value_name='value')
+    data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results', value_name='days')
     
     # Create an Altair chart
     chart = alt.Chart(data_long).mark_line().encode(
         x='month',
-        y='value:Q',  
+        y='days:Q',  
         color='results:N'  # Use the category field for color encoding
     ).properties(
-        title="My plot"
+        title="Turn around time (Culture)"
     )
     
-    st.altair_chart(chart, use_container_width=True,)
-    
-    st.write("Chart Dataframe")
-    st.dataframe(data_long)
+    st.altair_chart(chart, use_container_width=True)
+
+    # st.dataframe(culture_tat)
+    st.write("Culture Results")
+    st.dataframe(df1)
 
     with st.expander('Key', expanded=True):
         st.write('''
