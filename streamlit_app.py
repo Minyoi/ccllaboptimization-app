@@ -7,6 +7,7 @@ import altair as alt
 import pandas as pd
 import altair as alt
 import plotly.express as px
+alt.renderers.enable("html")
 
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
@@ -185,17 +186,32 @@ with col[0]:
     culture_tats['month'] = culture_tats['month_processed'].astype(str)
     culture_tats.drop('month_processed', axis=1)
 
-    a = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#308b8b").encode(x='month', y='Positive').stack("normalize")
-    b = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#b14a8e").encode(x='month', y='Negative').stack("normalize")
-    c = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#1751cc").encode(x='month', y='TF').stack("normalize")
-    d = alt.Chart(culture_tats).mark_area(opacity=0.5, color='#beaed4').encode(x='month', y='Contaminated').stack("normalize")
+    a = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#308b8b").encode(x='month', y='Positive')
+    b = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#b14a8e").encode(x='month', y='Negative')
+    c = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#1751cc").encode(x='month', y='TF')
+    d = alt.Chart(culture_tats).mark_area(opacity=0.5, color='#beaed4').encode(x='month', y='Contaminated')
     e = alt.layer(a, b,c,d)
     st.altair_chart(e, use_container_width=True)
 
     # st.dataframe(culture_tat)
     st.write("Culture Results")
     st.dataframe(df1)
+
+    # New data transformed
+    data_long = pd.melt(culture_tats, id_vars=['month'], value_vars=['Negative','Positive','TF','Z_test','Contaminated'], var_name='results')
     
+    # Create an Altair chart
+    chart = alt.Chart(data_long).mark_line().encode(
+        x='month',
+        y='results',
+        color='results:N'  # Use the category field for color encoding
+    ).properties(
+        title="My plot"
+    )
+    
+    st.altair_chart(chart, use_container_width=True)
+
+
     with st.expander('Key', expanded=True):
         st.write('''
             - Culture: Lab data processed upto ''' + str(max(quarter_list)) + '''
