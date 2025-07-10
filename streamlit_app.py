@@ -203,7 +203,8 @@ with col[0]:
     # Create an Altair chart
     chart = alt.Chart(data_long).mark_line().encode(
         x='month',
-        y='Negative,Positive,TF,Z_test,Contaminated',
+        # y='Negative,Positive,TF,Z_test,Contaminated',
+        y='results',
         color='results:N'  # Use the category field for color encoding
     ).properties(
         title="My plot"
