@@ -206,7 +206,7 @@ with col[0]:
         title="Turn around time (Culture)"
     )
     
-    line = alt.Chart(pd.DataFrame({'y': [65]})).mark_rule().encode(y='y')
+    line = alt.Chart(pd.DataFrame({'y': [60]})).mark_rule().encode(y='y')
     st.altair_chart(chart+line, use_container_width=True)
     
 
@@ -256,7 +256,8 @@ with col[1]:
         title="Turn around time (Xpert)"
     )
     
-    st.altair_chart(chart, use_container_width=True)
+    line1 = alt.Chart(pd.DataFrame({'y': [2]})).mark_rule().encode(y='y')
+    st.altair_chart(chart+line1, use_container_width=True)
 
 
     # st.dataframe(xpert_tat)
@@ -309,7 +310,8 @@ with col[2]:
         title="Turn around time (Smear)"
     )
     
-    st.altair_chart(chart, use_container_width=True)
+    line2 = alt.Chart(pd.DataFrame({'y': [2]})).mark_rule().encode(y='y')
+    st.altair_chart(chart+line, use_container_width=True)
 
 
 
