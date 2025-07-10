@@ -203,8 +203,8 @@ with col[0]:
     # Create an Altair chart
     chart = alt.Chart(culture_tats).mark_area(opacity=0.5).encode(
         x='month',
-        y='Negative,Positive,TF,Z_test,Contaminated:T',
-        color='source:N'  # Use the category field for color encoding
+        y='Negative,Positive,TF,Z_test,Contaminated:Q',
+        # color='source:N'  # Use the category field for color encoding
     ).properties(
         title="My plot"
     )
