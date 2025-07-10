@@ -235,10 +235,10 @@ with col[1]:
     xpert_tats['month'] = xpert_tats['month_processed'].astype(str)
     xpert_tats.drop('month_processed', axis=1)
 
-    a = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='MTB_Not_detected')
-    b = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='MTB_Detected')
-    c = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='Error')
-    d = alt.Chart(xpert_tats).mark_area(opacity=1).encode(x='month', y='Insufficient')
+    a = alt.Chart(xpert_tats).mark_area(opacity=0.6, color="#308b8b").encode(x='month', y='MTB_Not_detected')
+    b = alt.Chart(xpert_tats).mark_area(opacity=0.6, color="#2c1270").encode(x='month', y='MTB_Detected')
+    c = alt.Chart(xpert_tats).mark_area(opacity=0.6, color="#c93919").encode(x='month', y='Error')
+    d = alt.Chart(xpert_tats).mark_area(opacity=0.6, color="#aad021").encode(x='month', y='Insufficient')
     e = alt.layer(a, b,c,d)
     st.altair_chart(e, use_container_width=True)
 
