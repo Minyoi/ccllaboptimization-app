@@ -190,7 +190,7 @@ with col[0]:
     b = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#b14a8e").encode(x='month', y='Negative')
     c = alt.Chart(culture_tats).mark_area(opacity=0.5, color="#1751cc").encode(x='month', y='TF')
     d = alt.Chart(culture_tats).mark_area(opacity=0.5, color='#beaed4').encode(x='month', y='Contaminated')
-    e = alt.layer(a, b,c,d)
+    e = alt.layer(a,b,c,d)
     st.altair_chart(e, use_container_width=True)
 
     # st.dataframe(culture_tat)
@@ -203,13 +203,13 @@ with col[0]:
     # Create an Altair chart
     chart = alt.Chart(data_long).mark_area(opacity=0.5).encode(
         x='month',
-        y='value:Q', 
+        y='value:Q',  
         color='results:N'  # Use the category field for color encoding
     ).properties(
         title="My plot"
     )
     
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, use_container_width=True,)
     
     st.write("Chart Dataframe")
     st.dataframe(data_long)
