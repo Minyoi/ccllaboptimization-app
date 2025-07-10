@@ -210,7 +210,9 @@ with col[0]:
     )
     
     st.altair_chart(chart, use_container_width=True)
-
+    
+    st.write("Chart Dataframe")
+    st.dataframe(data_long)
 
     with st.expander('Key', expanded=True):
         st.write('''
