@@ -288,12 +288,28 @@ with col[2]:
     smear_tats['month'] = smear_tats['month_processed'].astype(str)
     smear_tats.drop('month_processed', axis=1)
 
-    a = alt.Chart(smear_tats).mark_area(opacity=1).encode(x='month', y='TB_Not_detected')
-    b = alt.Chart(smear_tats).mark_area(opacity=1).encode(x='month', y='TB_Detected')
+    a = alt.Chart(smear_tats).mark_area(opacity=0.6, color="#308b8b").encode(x='month', y='TB_Not_detected')
+    b = alt.Chart(smear_tats).mark_area(opacity=0.6, color="#080bd3").encode(x='month', y='TB_Detected')
 
     c = alt.layer(a, b)
 
     st.altair_chart(c, use_container_width=True)
+
+    # New smear turnaround time data transformed
+    sdata_long = pd.melt(smear_tats, id_vars=['month'], value_vars=['TB_Not_detected','TB_Detected'], var_name='results', value_name='days')
+    
+    # Create an Altair chart
+    chart = alt.Chart(sdata_long).mark_line().encode(
+        x='month',
+        y='days:Q',  
+        color='results:N'  # Use the category field for color encoding
+    ).properties(
+        title="Turn around time (Smear)"
+    )
+    
+    st.altair_chart(chart, use_container_width=True)
+
+
 
     # st.dataframe(smear_tat)
     st.write("Smear results")
