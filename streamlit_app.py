@@ -38,7 +38,9 @@ new_pivoted['culture_result'] = np.where(new_pivoted['CULTB']=='TBCP',1,np.where
 new_pivoted['rif_result'] = np.where(new_pivoted['XPRIF']=='RRND',0,np.where(new_pivoted['XPRIF']=='ZTEST',2,np.where(new_pivoted['XPRIF']=='NA',4,np.where(new_pivoted['XPRIF']=='INSUF',5,np.where(new_pivoted['XPRIF']=='RRIN',6,np.where(new_pivoted['XPRIF']=='RRDT',1,np.nan))))))
 new_pivoted['rif_det'] = np.where(new_pivoted['XPRIF']=='RRND',0,np.where(new_pivoted['XPRIF']=='INSUF',0,np.where(new_pivoted['XPRIF']=='RRIN',0,np.where(new_pivoted['XPRIF']=='RRTD',1,np.nan))))
 new_pivoted['xpos_rfdet'] = np.where((new_pivoted['xpert_result'] == 1)&(new_pivoted['rif_det']==1),1,np.where((new_pivoted['xpert_result'] == 1)&(new_pivoted['rif_det']==0),0,np.nan))
-    
+new_pivoted['smear_rec_rate_den'] = np.where((new_pivoted['AFBST']=='1AFB')&((new_pivoted['CULTB'] =='TBCP') | (new_pivoted['CULTB'] =='TBCN')),1,np.where((new_pivoted['AFBST']=='2AFB')&((new_pivoted['CULTB']=='TBCP') | (new_pivoted['CULTB'] =='TBCN')),1,np.where((new_pivoted['AFBST']=='3AFB')&((new_pivoted['CULTB']=='TBCP')| (new_pivoted['CULTB'] =='TBCN')),1,np.where((new_pivoted['AFBST']=='NAFB')&((new_pivoted['CULTB']=='TBCP')| (new_pivoted['CULTB'] =='TBCN')),1,0))))
+new_pivoted['smear_rec_rate_num'] = np.where((new_pivoted['AFBST']=='1AFB')&(new_pivoted['CULTB'] =='TBCP'),1,np.where((new_pivoted['AFBST']=='2AFB')&(new_pivoted['CULTB']=='TBCP'),1,np.where((new_pivoted['AFBST']=='3AFB')&(new_pivoted['CULTB']=='TBCP'),1,np.where((new_pivoted['AFBST']=='NAFB')&(new_pivoted['CULTB']=='TBCP'),1,0))))
+        
 
 culture_df = new_pivoted[['month_processed','year_processed' ,'culture_result','turnaround_time']]
 xpert_df = new_pivoted[['month_processed','year_processed', 'xpert_result','turnaround_time']]
@@ -46,7 +48,8 @@ smear_df = new_pivoted[['month_processed','year_processed', 'smear_result','turn
 smearlg_df = new_pivoted[['month_processed','year_processed', 'smear_lowgrade','turnaround_time']]
 rif_df = new_pivoted[['month_processed','year_processed', 'rif_result','turnaround_time']]
 xpos_rifdet_df = new_pivoted[['month_processed','year_processed', 'xpos_rfdet','turnaround_time']]
-    
+smear_recovery_df = new_pivoted[['month_processed','year_processed', 'smear_rec_rate_den', 'smear_rec_rate_num']]
+         
 
 
 (culture_df
@@ -152,7 +155,9 @@ df4_1['total_smear'] = df4[['Not_Lowgrade','Low_Grade']].sum(axis=1)
 df4_1['p_lowgrade'] = df4_1['Low_Grade']/df4_1['total_smear'] * 100
         
 df_smear_join = df4_1.join(df3_1, how='inner')
-      
+df6 = smear_recovery_df.groupby('month_processed')[['smear_rec_rate_den','smear_rec_rate_num']].sum()
+df6['recovery_rate'] = (df6['smear_rec_rate_num'] / df6['smear_rec_rate_den']) * 100
+df6.drop(['smear_rec_rate_den', 'smear_rec_rate_num'], axis='columns', inplace=True)              
 
 with st.sidebar:
     st.title('🏂 CCL Lab Optimization dashboard')
@@ -319,6 +324,10 @@ with col[2]:
     st.write("Smear results")
     st.dataframe(df3)
     # st.write(df3_1)
+
+    # Display line graph for recovery rate
+    st.write("Recovery rate")
+    st.line_chart(df6)
 
 
     with st.expander('Key', expanded=True):
