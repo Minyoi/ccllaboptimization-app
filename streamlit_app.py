@@ -318,18 +318,17 @@ with col[2]:
     line2 = alt.Chart(pd.DataFrame({'y': [2]})).mark_rule().encode(y='y')
     st.altair_chart(chart+line2, use_container_width=True)
 
+    # Display line graph for recovery rate
+    st.write("Recovery rate")
+    df6 = df6.reset_index() 
+    df6['month_processed'] = df6['month_processed'].astype(str)
+    st.line_chart(df6, x='month_processed')
 
 
     # st.dataframe(smear_tat)
     st.write("Smear results")
     st.dataframe(df3)
     # st.write(df3_1)
-
-    # Display line graph for recovery rate
-    st.write("Recovery rate")
-    df6 = df6.reset_index() 
-    df6['month_processed'] = df6['month_processed'].astype(str)
-    st.line_chart(df6, x='month_processed')
 
 
     with st.expander('Key', expanded=True):
