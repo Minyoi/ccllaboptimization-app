@@ -327,6 +327,8 @@ with col[2]:
 
     # Display line graph for recovery rate
     st.write("Recovery rate")
+    df6 = df6.reset_index() 
+    df6['month_processed'] = df6['month_processed'].astype(str)
     st.line_chart(df6)
 
 
