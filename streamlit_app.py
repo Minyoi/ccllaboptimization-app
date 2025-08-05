@@ -329,7 +329,7 @@ with col[2]:
     st.write("Recovery rate")
     df6 = df6.reset_index() 
     df6['month_processed'] = df6['month_processed'].astype(str)
-    st.line_chart(df6)
+    st.line_chart(df6, x='month_processed')
 
 
     with st.expander('Key', expanded=True):
