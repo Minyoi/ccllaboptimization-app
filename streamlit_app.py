@@ -18,9 +18,27 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 df = conn.read(spreadsheet=url)
 # st.dataframe(df)
 
+df['SAMPLE ID'] = df['SAMPLE ID'].replace('NULL', np.nan)
+df.dropna(subset=['SAMPLE ID'], inplace=True)
+
+df['PATIENT ID'] = df['PATIENT ID'].replace('NULL', np.nan)
+df.dropna(subset=['PATIENT ID'], inplace=True)
+
+df['TEST RESULT'] = df['TEST RESULT'].replace('NULL', np.nan)
+df.dropna(subset=['TEST RESULT'], inplace=True)
+
+df['TEST CODE'] = df['TEST CODE'].replace('NULL', np.nan)
+df.dropna(subset=['TEST CODE'], inplace=True)
+
+df['ACCESSION NUMBER'] = df['ACCESSION NUMBER'].replace('NULL', np.nan)
+df.dropna(subset=['ACCESSION NUMBER'], inplace=True)
+
+df['RECEIVE DATE'] = df['RECEIVE DATE'].replace('NULL', np.nan)
+df.dropna(subset=['RECEIVE DATE'], inplace=True)
+
 df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['ACCESSION NUMBER'].astype(str)
 df['rec_date'] = pd.to_datetime(df['RECEIVE DATE'], format='%m/%d/%Y')
-df['val_date'] = pd.to_datetime(df['VALIDATION DATE'],format="%m/%d/%Y")
+df['val_date'] = pd.to_datetime(df['VALIDATION DATE'],format='%m/%d/%Y')
 df['turnaround_time'] = (df['val_date'] - df['rec_date']).dt.days
 
 df['month_processed'] = df['rec_date'].dt.to_period('M')
@@ -28,6 +46,7 @@ df['year_processed'] = df['rec_date'].dt.to_period('Y')
 a = ['AFBST','XPUT','CULTB','XPRIF']
 new_df = df[df['TEST CODE'].isin(a)]
 pivoted = new_df.pivot(index=["sampleid_testcode","RECEIVE DATE", "month_processed","year_processed", "rec_date","val_date","turnaround_time"], columns="TEST CODE", values="TEST RESULT")
+#pivoted = pd.pivot_table(new_df,values='TEST RESULT',index=["sampleid_testcode","RECEIVE DATE", "month_processed","year_processed", "rec_date","val_date","turnaround_time"],columns='TEST CODE')
 new_pivoted = pivoted.reset_index()
 
 
