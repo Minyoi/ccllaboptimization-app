@@ -33,8 +33,6 @@ df.dropna(subset=['TEST CODE'], inplace=True)
 df['ACCESSION NUMBER'] = df['ACCESSION NUMBER'].replace('NULL', np.nan)
 df.dropna(subset=['ACCESSION NUMBER'], inplace=True)
 
-df['RECEIVE DATE'] = df['RECEIVE DATE'].replace('NULL', np.nan)
-df.dropna(subset=['RECEIVE DATE'], inplace=True)
 
 df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['ACCESSION NUMBER'].astype(str)
 df['rec_date'] = pd.to_datetime(df['RECEIVE DATE'], format='%m/%d/%Y')
