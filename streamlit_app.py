@@ -34,7 +34,7 @@ df['ACCESSION NUMBER'] = df['ACCESSION NUMBER'].replace('NULL', np.nan)
 df.dropna(subset=['ACCESSION NUMBER'], inplace=True)
 
 
-df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['SAMPLE ID'].astype(str)+'-'+ df['ACCESSION NUMBER'].astype(str)
+df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['TEST CODE'].astype(str)+'-'+ df['ACCESSION NUMBER'].astype(str)
 df['rec_date'] = pd.to_datetime(df['RECEIVE DATE'], format='%m/%d/%Y')
 df['val_date'] = pd.to_datetime(df['VALIDATION DATE'],format='%m/%d/%Y')
 df['turnaround_time'] = (df['val_date'] - df['rec_date']).dt.days
