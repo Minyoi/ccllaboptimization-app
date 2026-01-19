@@ -20,7 +20,7 @@ df = conn.read(spreadsheet=url)
 
 
 
-df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['SAMPLE ID'].astype(str) +'-' + '-'+ df['TEST CODE'].astype(str) +'-'+ df['ACCESSION NUMBER'].astype(str)
+df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['SAMPLE ID'].astype(str) +'-'+ df['ACCESSION NUMBER'].astype(str)
 #ai_df=df.copy()
 #ai_df['RECEIVE DATE'] = df['RECEIVE DATE'].replace('NULL', pd.NA)
 #aj_df = ai_df.dropna(subset=['RECEIVE DATE'])
