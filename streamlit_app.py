@@ -21,24 +21,24 @@ df = conn.read(spreadsheet=url)
 
 
 df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['SAMPLE ID'].astype(str) +'-' + '-'+ df['TEST CODE'].astype(str) +'-'+ df['ACCESSION NUMBER'].astype(str)
-ai_df=df.copy()
-ai_df['RECEIVE DATE'] = df['RECEIVE DATE'].replace('NULL', pd.NA)
-aj_df = ai_df.dropna(subset=['RECEIVE DATE'])
-ak_df=ai_df.copy()
-ak_df['rec_date'] = pd.to_datetime(aj_df['RECEIVE DATE'], format='%m/%d/%Y', errors='coerce')
+#ai_df=df.copy()
+#ai_df['RECEIVE DATE'] = df['RECEIVE DATE'].replace('NULL', pd.NA)
+#aj_df = ai_df.dropna(subset=['RECEIVE DATE'])
+#ak_df=ai_df.copy()
+df['rec_date'] = pd.to_datetime(df['RECEIVE DATE'], format='%m/%d/%Y', errors='coerce')
 #df['rec_date'] = pd.PeriodIndex(df['RECEIVE DATE'], freq='M')
-al_df = ak_df.copy()
-al_df['VALIDATION DATE'] = ak_df['VALIDATION DATE'].replace('NULL', pd.NA)
-am_df = al_df.dropna(subset=['VALIDATION DATE'])
-an_df = am_df.copy()
-an_df['val_date'] = pd.to_datetime(am_df['VALIDATION DATE'],format='%m/%d/%Y', errors='coerce')
+#al_df = ak_df.copy()
+#al_df['VALIDATION DATE'] = ak_df['VALIDATION DATE'].replace('NULL', pd.NA)
+#am_df = al_df.dropna(subset=['VALIDATION DATE'])
+#an_df = am_df.copy()
+df['val_date'] = pd.to_datetime(df['VALIDATION DATE'],format='%m/%d/%Y', errors='coerce')
 #df['val_date'] = pd.PeriodIndex(df['VALIDATION DATE'], freq='M')
-an_df['turnaround_time'] = (an_df['val_date'] - an_df['rec_date']).dt.days
+df['turnaround_time'] = (df['val_date'] - df['rec_date']).dt.days
 
-an_df['month_processed'] = an_df['rec_date'].dt.to_period('M')
-an_df['year_processed'] = an_df['rec_date'].dt.to_period('Y')
+df['month_processed'] = df['rec_date'].dt.to_period('M')
+df['year_processed'] = df['rec_date'].dt.to_period('Y')
 a = ['AFBST','XPUT','CULTB','XPRIF']
-new_df = an_df[an_df['TEST CODE'].isin(a)]
+new_df = df[df['TEST CODE'].isin(a)]
 pivoted = new_df.pivot_table(index=["sampleid_testcode","RECEIVE DATE", "month_processed","year_processed", "rec_date","val_date","turnaround_time"], columns="TEST CODE", values="TEST RESULT", aggfunc='max')
 #pivoted = pd.pivot_table(new_df,values='TEST RESULT',index=["sampleid_testcode","RECEIVE DATE", "month_processed","year_processed", "rec_date","val_date","turnaround_time"],columns='TEST CODE')
 new_pivoted = pivoted.reset_index()
