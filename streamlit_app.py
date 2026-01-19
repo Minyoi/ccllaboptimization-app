@@ -18,26 +18,7 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 df = conn.read(spreadsheet=url)
 # st.dataframe(df)
 
-df['SAMPLE ID'] = df['SAMPLE ID'].replace('NULL', np.nan)
-df.dropna(subset=['SAMPLE ID'], inplace=True)
 
-df['PATIENT ID'] = df['PATIENT ID'].replace('NULL', np.nan)
-df.dropna(subset=['PATIENT ID'], inplace=True)
-
-df['TEST RESULT'] = df['TEST RESULT'].replace('NULL', np.nan)
-df.dropna(subset=['TEST RESULT'], inplace=True)
-
-df['TEST CODE'] = df['TEST CODE'].replace('NULL', np.nan)
-df.dropna(subset=['TEST CODE'], inplace=True)
-
-df['ACCESSION NUMBER'] = df['ACCESSION NUMBER'].replace('NULL', np.nan)
-df.dropna(subset=['ACCESSION NUMBER'], inplace=True)
-
-df['RECEIVE DATE'] = df['RECEIVE DATE'].replace('NULL', np.nan)
-df.dropna(subset=['RECEIVE DATE'], inplace=True)
-
-df['VALIDATION DATE'] = df['VALIDATION DATE'].replace('NULL', np.nan)
-df.dropna(subset=['VALIDATION DATE'], inplace=True)
 
 df['sampleid_testcode'] = df['PATIENT ID'].astype(str) + '-'+ df['SAMPLE ID'].astype(str) +'-' + '-'+ df['TEST CODE'].astype(str) +'-'+ df['ACCESSION NUMBER'].astype(str)
 df['rec_date'] = pd.to_datetime(df['RECEIVE DATE'], format='%m/%d/%Y')
